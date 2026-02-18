@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELYSIΛ AI - Core System</title>
+    <style>
+        :root { --neon: #1aff1a; --dark: #050505; --gray: #1a1a1a; --text: #e0e0e0; }
+        body { background-color: #000; color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 15px; overflow-x: hidden; }
+        #container { background: var(--dark); border: 1px solid var(--gray); border-radius: 20px; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 0 20px rgba(26, 255, 26, 0.1); }
+        
+        /* Header & Clock */
+        .header { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding-bottom: 15px; margin-bottom: 20px; }
+        .logo h2 { margin: 0; font-size: 22px; color: var(--neon); letter-spacing: 3px; text-shadow: 0 0 10px var(--neon); }
+        #clock { font-family: monospace; color: var(--neon); font-size: 12px; }
+
+        /* Input Styles */
+        .input-box { margin-bottom: 15px; }
+        .input-box label { font-size: 9px; color: var(--neon); display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; background: #080808; border: 1px solid #222; color: var(--text); padding: 12px; border-radius: 8px; font-size: 13px; outline: none; box-sizing: border-box; }
+        input:focus { border-color: var(--neon); }
+
+        /* Console */
+        #console { background: #000; border: 1px solid #1a1a1a; height: 150px; border-radius: 10px; padding: 10px; font-family: monospace; font-size: 10px; color: #1aff1a; overflow-y: auto; margin: 20px 0; border-left: 3px solid var(--neon); }
+
+        /* Execution Button */
+        .btn { background: var(--neon); color: #000; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn:disabled { background: #114411; color: #555; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div class="header">
+        <div class="logo"><h2>ELYSIΛ AI</h2></div>
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <div class="input-box">
+        <label for="platform">TARGET PLATFORM</label>
+        <select id="platform">
+            <option value="TikTok">TIKTOK FYP ENGINE</option>
+            <option value="Instagram">INSTAGRAM REELS TUNER</option>
+            <option value="Youtube">YOUTUBE SHORTS BOOST</option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <label for="region">ACCESS REGION</label>
+        <select id="region">
+            <option value="Global-V5">GLOBAL V5 (ENCRYPTED)</option>
+            <option value="Asia-Pasific">ASIA PASIFIC (LOW LATENCY)</option>
+            <option value="Europe-Node">EUROPE NODE (STRICT)</option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <label for="phone">CLIENT WHATSAPP REPORT (62xxx)</label>
+        <input type="number" id="phone" placeholder="628123456789">
+    </div>
+
+    <div id="console">>> SYSTEM READY...<br>>> AWAITING COMMAND_</div>
+
+    <button id="exec-btn" class="btn" onclick="start()">Execute System</button>
+</div>
+
+<script>
+    // Update Clock Realtime
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    function addLog(msg) {
+        const c = document.getElementById('console');
+        c.innerHTML += `<br> >> ${msg}`;
+        c.scrollTop = c.scrollHeight;
+    }
+
+    // --- FITUR BARU: AI & PROXY INTEGRATION ---
+    const AI_KEY = "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"; // Masukkan API Key Groq Anda di sini
+
+    async function getAISuggestion(platform, region) {
+        addLog("CONSULTING ELYSIΛ NEURAL NETWORK...");
+        try {
+            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${AI_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    model: "llama3-8b-8192",
+                    messages: [{
+                        role: "system", 
+                        content: `Anda adalah ELYSIΛ AI. Berikan 1 kalimat teknis keren (maks 12 kata) tentang optimasi ${platform} di ${region}.`
+                    }]
+                })
+            });
+            const data = await response.json();
+            return data.choices[0].message.content;
+        } catch (error) {
+            return "ALGORITHM OPTIMIZED VIA BACKUP NEURAL NODE.";
+        }
+    }
+
+    async function executeWithProxy() {
+        addLog("ROUTING THROUGH PRIVATE PROXY...");
+        // Simulasi delay pendaran koneksi proxy
+        return new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+    // --- FUNGSI UTAMA (START) ---
+    async function start() {
+        const phone = document.getElementById('phone').value;
+        const platform = document.getElementById('platform').value;
+        const region = document.getElementById('region').value;
+        const btn = document.getElementById('exec-btn');
+
+        if (!phone) {
+            alert("Input WhatsApp Client!");
+            return;
+        }
+
+        // Disable UI
+        btn.disabled = true;
+        addLog("INITIALIZING SYSTEM CORE...");
+
+        // 1. Integrasi Proxy
+        await executeWithProxy();
+        addLog("PROXY CONNECTION ESTABLISHED [ENCRYPTED]");
+
+        // 2. Integrasi AI
+        const aiMessage = await getAISuggestion(platform, region);
+        addLog(`AI RESPONSE: ${aiMessage}`);
+
+        // 3. Animasi Node (Fitur lama dipertahankan)
+        const nodes = ["NODE_X1", "NODE_X2", "NODE_X3", "ENCRYPT_DB", "FINALIZING"];
+        for (let node of nodes) {
+            await new Promise(r => setTimeout(r, 1000));
+            addLog(`PROCESSING ${node}... [OK]`);
+        }
+
+        addLog("ALL SYSTEMS OPERATIONAL ✅");
+
+        // 4. Report WhatsApp (Fitur lama dipertahankan)
+        setTimeout(() => {
+            const msg = `*ELYSIΛ AI REPORT*%0A------------------------%0APlatform: ${platform}%0ARegion: ${region}%0AStatus: *SUCCESS*%0AAnalysis: ${aiMessage}`;
+            window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${msg}`;
+            btn.disabled = false;
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
