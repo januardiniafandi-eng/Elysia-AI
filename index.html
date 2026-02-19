@@ -77,28 +77,21 @@
 
     <div id="page2" class="page">
         <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">Reach</div>
-                <div class="stat-value" id="st-reach">+0%</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Algo</div>
-                <div class="stat-value">v3.8</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Geo</div>
-                <div class="stat-value" id="st-geo">IDLE</div>
-            </div>
+            <div class="stat-card"><div class="stat-label">Reach</div><div class="stat-value" id="st-reach">+0%</div></div>
+            <div class="stat-card"><div class="stat-label">Algo</div><div class="stat-value">v3.8</div></div>
+            <div class="stat-card"><div class="stat-label">Geo</div><div class="stat-value" id="st-geo">IDLE</div></div>
         </div>
 
         <div class="group">
-            <label for="p-url">URL Content yang akan di Injek</label>
-            <input type="url" id="p-url" placeholder="https://www.tiktok.com/@user/video/..." required>
+            <label for="p-url">URL Konten (YouTube/IG/TikTok/Web)</label>
+            <input type="url" id="p-url" placeholder="Paste link video/profil di sini..." required>
         </div>
 
         <div class="group">
             <label for="p-platform">Target Platform</label>
             <select id="p-platform">
+                <option value="YouTube Algorithm Boost">YouTube Algorithm Boost</option>
+                <option value="Instagram Engagement">Instagram Engagement</option>
                 <option value="TikTok FYP Engine">TikTok FYP Engine</option>
                 <option value="FB Marketplace">FB Marketplace</option>
                 <option value="Tokopedia SEO">Tokopedia SEO</option>
@@ -134,7 +127,7 @@
         </div>
 
         <div class="group">
-            <label for="p-prov">Target Region (34 Provinsi)</label>
+            <label for="p-prov">Target Region (38 Provinsi)</label>
             <select id="p-prov">
                 <option value="Aceh">Aceh</option><option value="Bali">Bali</option><option value="Banten">Banten</option>
                 <option value="Bengkulu">Bengkulu</option><option value="DI Yogyakarta">DI Yogyakarta</option><option value="DKI Jakarta">DKI Jakarta</option>
@@ -150,7 +143,6 @@
                 <option value="Sulawesi Tenggara">Sulawesi Tenggara</option><option value="Sulawesi Utara">Sulawesi Utara</option><option value="Sumatera Barat">Sumatera Barat</option>
                 <option value="Sumatera Selatan">Sumatera Selatan</option><option value="Sumatera Utara">Sumatera Utara</option>
             </select>
-            <input type="text" id="p-city" placeholder="Input Kota Manual..." style="margin-top:8px;">
         </div>
 
         <div class="icon-bar">
@@ -160,7 +152,7 @@
             <div class="icon-item" id="ic-inject"><i class="fas fa-bolt"></i><span>Inject</span></div>
         </div>
 
-        <div id="account-list"><b>LIST AKUN REAL TERINJEKSI:</b><br>@rizki_p, @sari_i, @budi_u, @ayu_l...</div>
+        <div id="account-list"><b>DAFTAR AKUN INJEKSI AKTIF:</b><br>@rizki_p, @sari_i, @budi_u, @ayu_l...</div>
         <button class="btn btn-neon" id="btn-run" onclick="executeSystem()">START CORE INJECTION</button>
     </div>
 
@@ -193,7 +185,7 @@
 
         async function executeSystem() {
             const url = document.getElementById('p-url').value;
-            if(!url) return alert("URL Content wajib diisi!");
+            if(!url) return alert("URL Konten wajib diisi!");
             const btn = document.getElementById('btn-run');
             btn.disabled = true;
             
@@ -213,7 +205,7 @@
 
             document.getElementById('ic-inject').classList.add('active');
             document.getElementById('account-list').style.display = "block";
-            addLog("INJECT: Berhasil menyuntikkan pasukan.");
+            addLog("INJECT: Berhasil menyuntikkan pasukan akun riil.");
             setTimeout(() => { alert("CORE INJECTION BERHASIL!"); btn.disabled = false; }, 1000);
         }
 
@@ -222,41 +214,37 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const client = document.getElementById('c-name').value || "Unnamed_Client";
+                const wa = document.getElementById('c-wa').value || "-";
                 const platform = document.getElementById('p-platform').value;
                 const nodes = document.getElementById('p-nodes').value;
                 const prov = document.getElementById('p-prov').value;
 
-                // Design Laporan (Black Mode)
                 doc.setFillColor(0,0,0); doc.rect(0,0,210,297,'F');
                 doc.setTextColor(26,255,26); doc.setFontSize(22);
                 doc.text("ELYSIΛ AI OFFICIAL REPORT", 20, 30);
                 doc.setDrawColor(255,102,0); doc.line(20, 35, 190, 35);
 
-                doc.setTextColor(255,255,255); doc.setFontSize(12);
-                doc.text("SUMMARY REPORT", 20, 50);
-                doc.setFontSize(10);
+                doc.setTextColor(255,255,255); doc.setFontSize(11);
+                doc.text("SUMMARY DATA CLIENT:", 20, 50);
                 doc.text("Client Name  : " + client, 20, 60);
-                doc.text("Platform     : " + platform, 20, 70);
-                doc.text("Target Region: " + prov, 20, 80);
-                doc.text("Total Nodes  : " + nodes + " Active Accounts", 20, 90);
-                doc.text("Timestamp    : " + new Date().toLocaleString(), 20, 100);
+                doc.text("WhatsApp     : " + wa, 20, 70);
+                doc.text("Platform     : " + platform, 20, 80);
+                doc.text("Target Region: " + prov, 20, 90);
+                doc.text("Total Nodes  : " + nodes + " Accounts", 20, 100);
+                doc.text("Date         : " + new Date().toLocaleString(), 20, 110);
 
-                doc.setTextColor(26,255,26); doc.setFontSize(12);
-                doc.text("INJECTED ACCOUNTS SAMPLE:", 20, 120);
-                
+                doc.setTextColor(26,255,26); doc.text("LIST INJECTED ACCOUNTS (SAMPLES):", 20, 130);
                 doc.setTextColor(255,255,255); doc.setFontSize(9);
-                const samples = ["@rizki_putra_99", "@sari_indah_jkt", "@budi_santoso_real", "@ayu_lestari_01", "@andri_wijaya_v3", "@dewi_permata_sea", "@fajar_shiddiq_88", "@melati_putri_real"];
-                let y = 130;
-                samples.forEach((acc, i) => { doc.text(`${i+1}. ${acc} - [Status: Active]`, 25, y); y += 7; });
+                const accounts = ["@rizki_p_99", "@sari_indah", "@budi_santoso", "@ayu_lestari", "@andri_wijaya", "@dewi_permata", "@fajar_shiddiq", "@melati_putri"];
+                let y = 140;
+                accounts.forEach((acc, i) => { doc.text(`${i+1}. ${acc} - [SUCCESS]`, 25, y); y += 7; });
                 doc.setTextColor(255,102,0);
-                doc.text(`... and ${nodes - 8} other nodes successfully injected.`, 25, y + 5);
+                doc.text(`... and ${nodes - 8} other nodes active.`, 25, y + 5);
 
-                // Anti-Force Close: Pakai Blob untuk WebView
+                // Anti-Force Close Blob
                 const blob = doc.output('bloburl');
                 window.open(blob, '_blank');
-            } catch (e) {
-                alert("Gagal membuat PDF: " + e.message);
-            }
+            } catch (e) { alert("Error: " + e.message); }
         }
     </script>
 </body>
