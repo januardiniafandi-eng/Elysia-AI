@@ -28,8 +28,7 @@
         .group { margin-bottom: 15px; }
         label { display: block; font-size: 10px; color: var(--orange); margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
         input, select, textarea { width: 100%; background: #0d0d0d; border: 1px solid #333; border-radius: 8px; padding: 12px; color: #fff; font-size: 13px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: var(--orange); }
-
+        
         #console { background: #000; border-left: 3px solid var(--orange); height: 120px; padding: 10px; font-family: 'Courier New', monospace; font-size: 10px; color: var(--neon); overflow-y: auto; margin-bottom: 15px; border-radius: 4px; line-height: 1.4; }
 
         .btn { border: none; width: 100%; padding: 16px; border-radius: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 13px; }
@@ -100,11 +99,11 @@
         <div class="group">
             <label for="p-platform">Target Platform</label>
             <select id="p-platform">
-                <option value="TikTok FYP">TikTok FYP Engine</option>
+                <option value="TikTok FYP Engine">TikTok FYP Engine</option>
                 <option value="FB Marketplace">FB Marketplace</option>
                 <option value="Tokopedia SEO">Tokopedia SEO</option>
                 <option value="Shopee Boost">Shopee Boost</option>
-                <option value="Google SEO">Google Website SEO</option>
+                <option value="Google Website SEO">Google Website SEO</option>
             </select>
         </div>
 
@@ -127,8 +126,10 @@
         <div class="group">
             <label for="p-nodes">Jumlah Nodes (Pasukan)</label>
             <select id="p-nodes">
-                <option value="100">100 Nodes</option><option value="1000">1000 Nodes</option>
-                <option value="10000">10000 Nodes</option><option value="30000">30000 Nodes</option>
+                <option value="100">100 Nodes</option>
+                <option value="1000">1000 Nodes</option>
+                <option value="10000">10000 Nodes</option>
+                <option value="30000">30000 Nodes</option>
             </select>
         </div>
 
@@ -136,8 +137,18 @@
             <label for="p-prov">Target Region (34 Provinsi)</label>
             <select id="p-prov">
                 <option value="Aceh">Aceh</option><option value="Bali">Bali</option><option value="Banten">Banten</option>
-                <option value="Jakarta">DKI Jakarta</option><option value="Jabar">Jawa Barat</option><option value="Jateng">Jawa Tengah</option>
-                <option value="Jatim">Jawa Timur</option><option value="Papua">Papua</option>
+                <option value="Bengkulu">Bengkulu</option><option value="DI Yogyakarta">DI Yogyakarta</option><option value="DKI Jakarta">DKI Jakarta</option>
+                <option value="Gorontalo">Gorontalo</option><option value="Jambi">Jambi</option><option value="Jawa Barat">Jawa Barat</option>
+                <option value="Jawa Tengah">Jawa Tengah</option><option value="Jawa Timur">Jawa Timur</option><option value="Kalimantan Barat">Kalimantan Barat</option>
+                <option value="Kalimantan Selatan">Kalimantan Selatan</option><option value="Kalimantan Tengah">Kalimantan Tengah</option><option value="Kalimantan Timur">Kalimantan Timur</option>
+                <option value="Kalimantan Utara">Kalimantan Utara</option><option value="Kepulauan Bangka Belitung">Kepulauan Bangka Belitung</option><option value="Kepulauan Riau">Kepulauan Riau</option>
+                <option value="Lampung">Lampung</option><option value="Maluku">Maluku</option><option value="Maluku Utara">Maluku Utara</option>
+                <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option><option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option><option value="Papua">Papua</option>
+                <option value="Papua Barat">Papua Barat</option><option value="Papua Pegunungan">Papua Pegunungan</option><option value="Papua Selatan">Papua Selatan</option>
+                <option value="Papua Tengah">Papua Tengah</option><option value="Papua Barat Daya">Papua Barat Daya</option><option value="Riau">Riau</option>
+                <option value="Sulawesi Barat">Sulawesi Barat</option><option value="Sulawesi Selatan">Sulawesi Selatan</option><option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                <option value="Sulawesi Tenggara">Sulawesi Tenggara</option><option value="Sulawesi Utara">Sulawesi Utara</option><option value="Sumatera Barat">Sumatera Barat</option>
+                <option value="Sumatera Selatan">Sumatera Selatan</option><option value="Sumatera Utara">Sumatera Utara</option>
             </select>
             <input type="text" id="p-city" placeholder="Input Kota Manual..." style="margin-top:8px;">
         </div>
@@ -154,7 +165,6 @@
     </div>
 
     <script>
-        // --- SECURITY & DATA ---
         const _0xSECURE_CONFIG = {
             proxy_data: atob("bnVsbDpudWxsOnBjVWpLWjFCUVg6UENfNzRPcnVLYVlBVXJ4M01teDE="), 
             groq_key: atob("Z3NrX3ZKVDVhc3dLWWRxZnhuT0Rwd2NJV0dkeWIzRllSbXNxVkpjVGpaeUVCa2s2alUzd0FBQU0=")
@@ -183,8 +193,7 @@
 
         async function executeSystem() {
             const url = document.getElementById('p-url').value;
-            if(!url) return alert("URL wajib diisi!");
-            
+            if(!url) return alert("URL Content wajib diisi!");
             const btn = document.getElementById('btn-run');
             btn.disabled = true;
             
@@ -205,21 +214,49 @@
             document.getElementById('ic-inject').classList.add('active');
             document.getElementById('account-list').style.display = "block";
             addLog("INJECT: Berhasil menyuntikkan pasukan.");
-
             setTimeout(() => { alert("CORE INJECTION BERHASIL!"); btn.disabled = false; }, 1000);
         }
 
         function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const client = document.getElementById('c-name').value || "Unnamed_Client";
-            doc.setFillColor(0,0,0); doc.rect(0,0,210,297,'F');
-            doc.setTextColor(26,255,26); doc.setFontSize(22);
-            doc.text("ELYSIΛ AI OFFICIAL REPORT", 20, 30);
-            doc.setTextColor(255,255,255); doc.setFontSize(12);
-            doc.text("Client Name  : " + client, 20, 55);
-            doc.text("Report Date  : " + new Date().toLocaleString(), 20, 65);
-            doc.save(`Report_${client}.pdf`);
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const client = document.getElementById('c-name').value || "Unnamed_Client";
+                const platform = document.getElementById('p-platform').value;
+                const nodes = document.getElementById('p-nodes').value;
+                const prov = document.getElementById('p-prov').value;
+
+                // Design Laporan (Black Mode)
+                doc.setFillColor(0,0,0); doc.rect(0,0,210,297,'F');
+                doc.setTextColor(26,255,26); doc.setFontSize(22);
+                doc.text("ELYSIΛ AI OFFICIAL REPORT", 20, 30);
+                doc.setDrawColor(255,102,0); doc.line(20, 35, 190, 35);
+
+                doc.setTextColor(255,255,255); doc.setFontSize(12);
+                doc.text("SUMMARY REPORT", 20, 50);
+                doc.setFontSize(10);
+                doc.text("Client Name  : " + client, 20, 60);
+                doc.text("Platform     : " + platform, 20, 70);
+                doc.text("Target Region: " + prov, 20, 80);
+                doc.text("Total Nodes  : " + nodes + " Active Accounts", 20, 90);
+                doc.text("Timestamp    : " + new Date().toLocaleString(), 20, 100);
+
+                doc.setTextColor(26,255,26); doc.setFontSize(12);
+                doc.text("INJECTED ACCOUNTS SAMPLE:", 20, 120);
+                
+                doc.setTextColor(255,255,255); doc.setFontSize(9);
+                const samples = ["@rizki_putra_99", "@sari_indah_jkt", "@budi_santoso_real", "@ayu_lestari_01", "@andri_wijaya_v3", "@dewi_permata_sea", "@fajar_shiddiq_88", "@melati_putri_real"];
+                let y = 130;
+                samples.forEach((acc, i) => { doc.text(`${i+1}. ${acc} - [Status: Active]`, 25, y); y += 7; });
+                doc.setTextColor(255,102,0);
+                doc.text(`... and ${nodes - 8} other nodes successfully injected.`, 25, y + 5);
+
+                // Anti-Force Close: Pakai Blob untuk WebView
+                const blob = doc.output('bloburl');
+                window.open(blob, '_blank');
+            } catch (e) {
+                alert("Gagal membuat PDF: " + e.message);
+            }
         }
     </script>
 </body>
