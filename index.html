@@ -10,7 +10,6 @@
         :root { --neon: #1aff1a; --orange: #ff6600; --dark: #000; --card: #111; --text: #e0e0e0; }
         body { background: var(--dark); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 30px; }
         
-        /* Navigasi Tab */
         .nav-bar { display: flex; background: #111; border-bottom: 2px solid var(--orange); position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .nav-item { flex: 1; padding: 15px; text-align: center; font-size: 11px; font-weight: bold; cursor: pointer; color: #666; transition: 0.3s; }
         .nav-item.active { color: var(--orange); border-bottom: 3px solid var(--orange); background: #1a1a1a; }
@@ -21,28 +20,22 @@
         .logo { color: var(--neon); font-size: 28px; font-weight: 900; text-align: center; margin-top: 10px; letter-spacing: 3px; text-shadow: 0 0 10px var(--neon); }
         .version { color: var(--orange); font-size: 10px; text-align: center; margin-bottom: 15px; font-weight: bold; }
 
-        /* Stats Section */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .stat-card { background: var(--card); padding: 12px 5px; border-radius: 10px; text-align: center; border: 1px solid #222; }
         .stat-label { font-size: 8px; color: var(--orange); text-transform: uppercase; margin-bottom: 4px; }
         .stat-value { font-size: 14px; font-weight: bold; color: var(--neon); }
 
-        /* Form Controls */
         .group { margin-bottom: 15px; }
         label { display: block; font-size: 10px; color: var(--orange); margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
         input, select, textarea { width: 100%; background: #0d0d0d; border: 1px solid #333; border-radius: 8px; padding: 12px; color: #fff; font-size: 13px; box-sizing: border-box; outline: none; }
         input:focus { border-color: var(--orange); }
 
-        /* Console */
         #console { background: #000; border-left: 3px solid var(--orange); height: 120px; padding: 10px; font-family: 'Courier New', monospace; font-size: 10px; color: var(--neon); overflow-y: auto; margin-bottom: 15px; border-radius: 4px; line-height: 1.4; }
 
-        /* Buttons */
         .btn { border: none; width: 100%; padding: 16px; border-radius: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 13px; }
         .btn-orange { background: var(--orange); color: #fff; margin-bottom: 10px; }
         .btn-neon { background: var(--neon); color: #000; box-shadow: 0 0 15px rgba(26,255,26,0.3); }
-        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* Icon Status */
         .icon-bar { display: flex; justify-content: space-between; background: #111; padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #222; }
         .icon-item { text-align: center; opacity: 0.15; font-size: 9px; flex: 1; transition: 0.5s; color: #fff; }
         .icon-item i { font-size: 18px; display: block; margin-bottom: 5px; }
@@ -61,7 +54,6 @@
     <div id="page1" class="page active">
         <div class="logo">ELYSIΛ AI</div>
         <div class="version">MANAGEMENT SYSTEM V3.8</div>
-
         <div class="group">
             <label for="c-name">Nama Lengkap Client</label>
             <input type="text" id="c-name" placeholder="Input Nama Client...">
@@ -78,9 +70,7 @@
             <label for="c-history">Riwayat & Jenis Pesanan</label>
             <textarea id="c-history" rows="2" placeholder="Tulis detail pesanan..."></textarea>
         </div>
-
         <div id="console">> SYSTEM IDLE. AWAITING CLIENT DATA...</div>
-        
         <button class="btn btn-orange" onclick="downloadPDF()">
             <i class="fas fa-file-pdf"></i> GENERATE REPORT PDF
         </button>
@@ -103,27 +93,18 @@
         </div>
 
         <div class="group">
-            <label for="p-platform">Target Platform</label>
-            <select id="p-platform">
-                <option value="TikTok FYP">TikTok FYP Engine</option>
-                <option value="Facebook Marketplace">FB Marketplace</option>
-                <option value="Tokopedia SEO">Tokopedia SEO</option>
-                <option value="Shopee Boost">Shopee Boost</option>
-                <option value="OLX Optimasi">OLX Optimasi</option>
-                <option value="Website SEO">Google Website SEO</option>
-                <option value="Google Bisnis">Google Bisnis</option>
-                <option value="WA Optimization">WA Number Optimization</option>
-            </select>
+            <label for="p-url">URL Content yang akan di Injek</label>
+            <input type="url" id="p-url" placeholder="https://www.tiktok.com/@user/video/..." required>
         </div>
 
         <div class="group">
-            <label for="p-cat">Kategori Client</label>
-            <select id="p-cat">
-                <option value="Perusahaan">Perusahaan</option>
-                <option value="Toko Online">Toko Online</option>
-                <option value="Affiliator">Affiliator</option>
-                <option value="Influencer">Influencer</option>
-                <option value="Tokoh Politik">Tokoh Politik</option>
+            <label for="p-platform">Target Platform</label>
+            <select id="p-platform">
+                <option value="TikTok FYP">TikTok FYP Engine</option>
+                <option value="FB Marketplace">FB Marketplace</option>
+                <option value="Tokopedia SEO">Tokopedia SEO</option>
+                <option value="Shopee Boost">Shopee Boost</option>
+                <option value="Google SEO">Google Website SEO</option>
             </select>
         </div>
 
@@ -146,13 +127,8 @@
         <div class="group">
             <label for="p-nodes">Jumlah Nodes (Pasukan)</label>
             <select id="p-nodes">
-                <option value="100">100 Nodes</option>
-                <option value="300">300 Nodes</option>
-                <option value="1000">1000 Nodes</option>
-                <option value="3000">3000 Nodes</option>
-                <option value="10000">10000 Nodes</option>
-                <option value="30000">30000 Nodes</option>
-                <option value="manual">Tulis Sendiri...</option>
+                <option value="100">100 Nodes</option><option value="1000">1000 Nodes</option>
+                <option value="10000">10000 Nodes</option><option value="30000">30000 Nodes</option>
             </select>
         </div>
 
@@ -160,37 +136,12 @@
             <label for="p-prov">Target Region (34 Provinsi)</label>
             <select id="p-prov">
                 <option value="Aceh">Aceh</option><option value="Bali">Bali</option><option value="Banten">Banten</option>
-                <option value="Bengkulu">Bengkulu</option><option value="DIY">DI Yogyakarta</option><option value="Jakarta">DKI Jakarta</option>
-                <option value="Jabar">Jawa Barat</option><option value="Jateng">Jawa Tengah</option><option value="Jatim">Jawa Timur</option>
-                <option value="Kalbar">Kalimantan Barat</option><option value="Papua">Papua</option>
-                </select>
-            <label for="p-city"></label><input type="text" id="p-city" placeholder="Input Kota/Kabupaten Manual..." style="margin-top:8px;">
+                <option value="Jakarta">DKI Jakarta</option><option value="Jabar">Jawa Barat</option><option value="Jateng">Jawa Tengah</option>
+                <option value="Jatim">Jawa Timur</option><option value="Papua">Papua</option>
+            </select>
+            <input type="text" id="p-city" placeholder="Input Kota Manual..." style="margin-top:8px;">
         </div>
 
-        <div class="group">
-    <label for="p-url">URL Content yang akan di Injek</label>
-    <input type="url" id="p-url" placeholder="https://www.tiktok.com/@user/video/..." required>
-</div>
-
-<div class="group">
-    <label for="p-url-cat">Kategori Konten (TikTok Category)</label>
-    <select id="p-url-cat">
-        <option value="beauty">Kosmetik & Kecantikan</option>
-        <option value="fashion">Pakaian & Fashion</option>
-        <option value="food">Kuliner & Makanan</option>
-        <option value="tech">Elektronik & Gadget</option>
-        <option value="education">Edukasi & Jasa</option>
-        <option value="entertainment">Hiburan / Tokoh Politik</option>
-    </select>
-</div>
-  // Lokasi: Baris 184 di dalam <script> index.html
-const _0xSECURE_CONFIG = {
-    // Tempel hasil ENCODE tadi di dalam tanda kutip ini
-    proxy_data: atob("bnVsbDpudWxsOnBjVWpLWjFCUVg6UENfNzRPcnVLYVlBVXJ4M01teDE="), 
-    
-    // Lakukan hal yang sama untuk API KEY Groq Anda
-    groq_key: atob("Z3NrX3ZKVDVhc3dLWWRxZnhuT0Rwd2NJV0dkeWIzRllSbXNxVkpjVGpaeUVCa2s2alUzd0FBQU0=")
-};      
         <div class="icon-bar">
             <div class="icon-item" id="ic-watch"><i class="fas fa-satellite"></i><span>Watcher</span></div>
             <div class="icon-item" id="ic-brain"><i class="fas fa-brain"></i><span>Brain AI</span></div>
@@ -198,17 +149,16 @@ const _0xSECURE_CONFIG = {
             <div class="icon-item" id="ic-inject"><i class="fas fa-bolt"></i><span>Inject</span></div>
         </div>
 
-        <div id="account-list">
-            <b style="color:var(--orange)">LIST AKUN REAL TERINJEKSI:</b><br>
-            @rizki_perdana, @sari_indah, @budi_utomo, @ayu_lestari, @dedy_jaya, @nina_tech, @eko_saputra...
-        </div>
-
+        <div id="account-list"><b>LIST AKUN REAL TERINJEKSI:</b><br>@rizki_p, @sari_i, @budi_u, @ayu_l...</div>
         <button class="btn btn-neon" id="btn-run" onclick="executeSystem()">START CORE INJECTION</button>
     </div>
 
     <script>
-        // --- SECURITY: API KEY HIDDEN ---
-        const _0xEL = "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"; 
+        // --- SECURITY & DATA ---
+        const _0xSECURE_CONFIG = {
+            proxy_data: atob("bnVsbDpudWxsOnBjVWpLWjFCUVg6UENfNzRPcnVLYVlBVXJ4M01teDE="), 
+            groq_key: atob("Z3NrX3ZKVDVhc3dLWWRxZnhuT0Rwd2NJV0dkeWIzRllSbXNxVkpjVGpaeUVCa2s2alUzd0FBQU0=")
+        };
 
         function switchPage(n) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -222,7 +172,6 @@ const _0xSECURE_CONFIG = {
             const nodes = document.getElementById('p-nodes');
             if(pkg == "250") nodes.value = "100";
             else if(pkg == "1000") nodes.value = "1000";
-            else if(pkg == "5000") nodes.value = "10000";
             else if(pkg == "50000") nodes.value = "30000";
         }
 
@@ -233,60 +182,45 @@ const _0xSECURE_CONFIG = {
         }
 
         async function executeSystem() {
+            const url = document.getElementById('p-url').value;
+            if(!url) return alert("URL wajib diisi!");
+            
             const btn = document.getElementById('btn-run');
             btn.disabled = true;
             
-            // Watcher
             document.getElementById('ic-watch').classList.add('active');
-            addLog("WATCHER: Scan URL Target melalui Rotating Proxy...");
+            addLog("WATCHER: Scan Target melalui Rotating Proxy...");
             await new Promise(r => setTimeout(r, 1500));
 
-            // Brain (AI)
             document.getElementById('ic-brain').classList.add('active');
-            addLog("AI: Menganalisis pola algoritma " + document.getElementById('p-platform').value);
+            addLog("AI: Analisis pola algoritma platform...");
             await new Promise(r => setTimeout(r, 2000));
 
-            // GeoSync
             document.getElementById('ic-geo').classList.add('active');
             document.getElementById('st-reach').innerText = "+98.7%";
             document.getElementById('st-geo').innerText = "STABLE";
-            addLog("GEOSYNC: Sinkronisasi region ke " + document.getElementById('p-prov').value);
+            addLog("GEOSYNC: Region locked ke " + document.getElementById('p-prov').value);
             await new Promise(r => setTimeout(r, 1500));
 
-            // Inject
             document.getElementById('ic-inject').classList.add('active');
             document.getElementById('account-list').style.display = "block";
-            addLog("INJECT: Berhasil menyuntikkan " + document.getElementById('p-nodes').value + " akun asli.");
+            addLog("INJECT: Berhasil menyuntikkan pasukan.");
 
-            setTimeout(() => {
-                alert("CORE INJECTION BERHASIL!");
-                btn.disabled = false;
-            }, 1000);
+            setTimeout(() => { alert("CORE INJECTION BERHASIL!"); btn.disabled = false; }, 1000);
         }
 
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const client = document.getElementById('c-name').value || "Unnamed_Client";
-            
-            // Background & Header
             doc.setFillColor(0,0,0); doc.rect(0,0,210,297,'F');
             doc.setTextColor(26,255,26); doc.setFontSize(22);
             doc.text("ELYSIΛ AI OFFICIAL REPORT", 20, 30);
-            
-            // Content
             doc.setTextColor(255,255,255); doc.setFontSize(12);
-            doc.text("--------------------------------------------------", 20, 40);
             doc.text("Client Name  : " + client, 20, 55);
-            doc.text("Platform     : " + document.getElementById('p-platform').value, 20, 65);
-            doc.text("Nodes Result : " + document.getElementById('p-nodes').value + " Active Accounts", 20, 75);
-            doc.text("Status       : SUCCESSFUL INJECTION", 20, 85);
-            doc.text("Report Date  : " + new Date().toLocaleString(), 20, 95);
-            
-            doc.save(`Elysia_Report_${client}.pdf`);
+            doc.text("Report Date  : " + new Date().toLocaleString(), 20, 65);
+            doc.save(`Report_${client}.pdf`);
         }
     </script>
 </body>
 </html>
-
-
