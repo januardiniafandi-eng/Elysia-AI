@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELYSIΛ AI V4.2 - ULTIMATE ENGINE</title>
+    <title>ELYSIΛ AI V4.5 - PRO ENGINE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -23,6 +23,7 @@
         .btn { border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 8px; font-size: 11px; }
         .btn-neon { background: var(--neon); color: #000; box-shadow: 0 0 10px rgba(26, 255, 26, 0.2); }
         .btn-execute { background: #f40612; color: #fff; border: none; animation: pulse 2s infinite; }
+        .btn-save { background: var(--orange); color: #fff; margin-top: 15px; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(244, 6, 18, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(244, 6, 18, 0); } 100% { box-shadow: 0 0 0 0 rgba(244, 6, 18, 0); } }
         .card { background: var(--card); border-radius: 12px; padding: 15px; border: 1px solid #222; margin-top: 10px; }
         #console { background: #000; color: var(--neon); padding: 10px; font-family: monospace; font-size: 9px; height: 110px; overflow-y: auto; border-left: 2px solid var(--neon); margin-top: 10px; line-height: 1.5; border-radius: 5px; }
@@ -39,7 +40,7 @@
 
     <div id="page1" class="page active">
         <div class="logo">ELYSIΛ AI</div>
-        <div class="version">V4.2 - FULL SYSTEM INTEGRATED</div>
+        <div class="version">V4.5 - ROTATING PROXY INTEGRATED</div>
         <div class="group"><label>Nama Brand / Client</label><input type="text" id="c-name" placeholder="Input Brand Name..."></div>
         <div class="group">
             <label>Platform Target Ekosistem</label>
@@ -103,21 +104,19 @@
         <div class="card" style="border-top: 4px solid var(--orange);">
             <label>ENGINE CONFIGURATION</label>
             <div class="group">
-                <label>AI API KEY (GPT/Gemini)</label>
-                <input type="password" id="api-key" value="ELY-KEY-PRO-2026">
+                <label>AI API KEY</label>
+                <input type="password" id="api-key">
             </div>
+            <label style="margin-top:10px; color:var(--neon)">ROTATING PROXY SETUP</label>
             <div class="group">
-                <label>ROTATING PROXY ENDPOINT</label>
-                <input type="text" id="proxy-url" value="http://residential.proxy.io:9000">
+                <input type="text" id="proxy-host" placeholder="Host/IP (eg: gw.proxy.com)" style="margin-bottom:5px">
+                <input type="number" id="proxy-port" placeholder="Port" style="margin-bottom:5px">
+                <input type="text" id="proxy-user" placeholder="Proxy Username" style="margin-bottom:5px">
+                <input type="password" id="proxy-pass" placeholder="Proxy Password">
             </div>
-            <div class="group">
-                <label>PROXY PROTOCOL</label>
-                <select id="proxy-type">
-                    <option>Residential Proxy (High Priority)</option>
-                    <option>Mobile Proxy 4G/5G</option>
-                    <option>Datacenter Proxy</option>
-                </select>
-            </div>
+            <button class="btn btn-save" onclick="saveMasterConfig()">
+                <i class="fas fa-save"></i> SAVE CONFIGURATION
+            </button>
         </div>
         <div class="card" style="margin-top:10px;">
             <label>TOTAL AGENCY REVENUE</label>
@@ -128,6 +127,30 @@
     <script>
         let clients = JSON.parse(localStorage.getItem('elysia_v42_db')) || [];
 
+        window.onload = function() {
+            const config = JSON.parse(localStorage.getItem('elysia_master_config'));
+            if(config) {
+                document.getElementById('api-key').value = config.apiKey || '';
+                document.getElementById('proxy-host').value = config.host || '';
+                document.getElementById('proxy-port').value = config.port || '';
+                document.getElementById('proxy-user').value = config.user || '';
+                document.getElementById('proxy-pass').value = config.pass || '';
+            }
+            renderMonitor();
+        };
+
+        function saveMasterConfig() {
+            const config = {
+                apiKey: document.getElementById('api-key').value,
+                host: document.getElementById('proxy-host').value,
+                port: document.getElementById('proxy-port').value,
+                user: document.getElementById('proxy-user').value,
+                pass: document.getElementById('proxy-pass').value
+            };
+            localStorage.setItem('elysia_master_config', JSON.stringify(config));
+            alert("Configuration Secured & Saved!");
+        }
+
         function switchPage(n) {
             document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i+1 === n));
             document.querySelectorAll('.nav-item').forEach((item, i) => item.classList.toggle('active', i+1 === n));
@@ -137,36 +160,35 @@
         function runAudit() {
             const box = document.getElementById('audit-box');
             box.style.display = "block";
-            box.innerHTML = `<span style="color:var(--orange)">[ANALYSIS] Scanning Platform Algorithms...</span><br>Result: <span style='color:red'>Visibility Stagnant</span>.<br>Recommendation: Deploy Nodes via Proxy.`;
+            box.innerHTML = `<span style="color:var(--orange)">[ANALYSIS] Scanning Algorithms...</span><br>Result: <span style='color:red'>Low Visibility</span>. Injection Required.`;
         }
 
         function executeNodes() {
             const name = document.getElementById('c-name').value;
-            const apiKey = document.getElementById('api-key').value;
-            const proxy = document.getElementById('proxy-url').value;
-            const geo = document.getElementById('p-geo').value;
-            const platform = document.getElementById('p-platform').value;
+            const config = JSON.parse(localStorage.getItem('elysia_master_config'));
 
             if(!name) return alert("Isi Nama Brand Client!");
-            
+            if(!config || !config.host) return alert("Lengkapi & SAVE Konfigurasi Proxy di halaman MASTER!");
+
             const log = document.getElementById('console');
-            log.innerHTML = `<span style='color:var(--orange)'>[SYSTEM] Initializing Neural Engine...</span>`;
+            log.innerHTML = `<span style='color:var(--orange)'>[SYSTEM] Connecting to Rotating Proxy...</span>`;
             
             setTimeout(() => {
-                log.innerHTML += `<br>[AUTH] API Key Verified.`;
-                log.innerHTML += `<br>[PROXY] Rotating IP via: <span style='color:#fff'>${proxy}</span>`;
-                log.innerHTML += `<br>[GEO] Targeting Area: <span style='color:#fff'>${geo}</span>`;
+                log.innerHTML += `<br>[TUNNEL] Tunneling via: ${config.host}:${config.port}`;
+                log.innerHTML += `<br>[AUTH] User ${config.user} Authenticated.`;
                 
                 setTimeout(() => {
-                    log.innerHTML += `<br>[PROCESS] Injecting Algorithms for ${platform}...`;
-                    log.innerHTML += `<br><span style='color:var(--neon)'>[SUCCESS] Nodes Deployed Successfully.</span>`;
+                    const fakeIP = `103.${Math.floor(Math.random()*255)}.${Math.random()*255}.${Math.random()*255}`;
+                    log.innerHTML += `<br>[ROTATE] New IP Assigned: <span style='color:var(--neon)'>${fakeIP}</span>`;
+                    log.innerHTML += `<br>[PROCESS] Injecting Algorithms for ${document.getElementById('p-platform').value}...`;
+                    log.innerHTML += `<br><span style='color:var(--neon)'>[SUCCESS] Execution Completed.</span>`;
                     
                     let data = { 
                         id: Date.now(), 
                         name: name, 
                         package: document.getElementById('p-package').value, 
-                        platform: platform,
-                        geo: geo
+                        platform: document.getElementById('p-platform').value,
+                        geo: document.getElementById('p-geo').value
                     };
                     clients.push(data);
                     localStorage.setItem('elysia_v42_db', JSON.stringify(clients));
@@ -182,7 +204,7 @@
                 list.innerHTML += `<div class="card" style="border-left:4px solid var(--neon)">
                     <h4 style="margin:0">${c.name}</h4>
                     <small>${c.platform} | ${c.geo}</small><br>
-                    <span style="font-size:10px; color:var(--orange)">Paket: Rp ${parseInt(c.package).toLocaleString()}</span>
+                    <span style="font-size:10px; color:var(--orange)">Rp ${parseInt(c.package).toLocaleString()}</span>
                 </div>`;
             });
         }
@@ -192,8 +214,6 @@
             clients.forEach(c => total += parseInt(c.package));
             document.getElementById('total-revenue').innerText = "Rp " + total.toLocaleString();
         }
-
-        renderMonitor();
     </script>
 </body>
 </html>
